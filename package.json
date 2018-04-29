@@ -9,6 +9,9 @@
   "author": "Svetoslav Spasov",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "eslint": "^4.19.1",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.5.0",
+    "gulp-open": "^3.0.1"
   }
 }

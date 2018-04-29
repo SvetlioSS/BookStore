@@ -1,5 +1,21 @@
-var gulp = require('gulp');
+'use strict'
 
-gulp.task('default', function() {
-  // place code for your default task here
+var gulp = require('gulp');
+var connect = require('gulp-connect');
+var open = require('gulp-open');
+
+var config = {
+  port: 9005,
+  devBaseUrl: 'http://localhost'
+};
+
+gulp.task('connect', function() {
+  connect.server({
+    root: ['dist'],
+    port: config.port,
+    base: config.devBaseUrl,
+    livereload: true
+  });
 });
+
+gulp.task('default', ['connect']);
