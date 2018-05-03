@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Document</title>
+
+	<style>
+		.borders {
+			border: 1px solid black;
+		}
+		.sizes {
+			height: 100px;
+			width: 100px;
+		}
+		.margins {
+			margin: 10px;
+		}
+		.accent-color {
+			background-color: aquamarine;
+		}
+	</style>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+	<!-- Vue.js templates and bindings -->
+	<div id="app">
+		<!-- 1. Semantic binding -->
+		<div>{{ message }}</div>
+
+		<!-- 2. Declarative binding -->
+		<div v-text="someText"></div>
+
+		<!-- 3. Onetime binding - to avoid watching for changes (it will be avoided for children also) -->
+		<div v-once v-text="constantText"></div>
+
+		<!-- 4. HTML, Attribute, Property bindings -->
+		<!-- Be carefull for XSS when using v-html! -->
+		<!-- The styles object is defined as data property -->
+		<div v-html="someLink" v-bind:style="linkStyles" :id="linkID"></div>
+		<!-- The styles object is defined inside the style binding -->
+		<div v-html="someLink" v-bind:style="{
+			backgroundColor: 'blue'
+		}"></div>
+		<!-- The styles are defined as an array (can be reused by other elements as well) -->
+		<div v-html="someLink" v-bind:style="[backgroundStyles]"></div>
+		<div v-html="someLink" v-bind:style="[backgroundStyles, fontStyles]"></div>
+
+		<!-- 5. Class bindings with arrays -->
+		<div v-bind:class="[borderClass, marginClass]">Test 1</div>
+		<div v-bind:class="[borderClass, marginClass, sizeClass]">Test 2</div>
+		<div v-bind:class="allClasses">Test 3</div>
+		<div v-bind:class="{
+			'borders': true,
+			'sizes': true,
+			'margins': true,
+			'accent-color': shouldAddAccent
+		}">Test 4</div>
+
+		<!-- 6. Expression bindings -->
+		<div v-bind:class="shouldAddAccent ? allClasses : [marginClass, borderClass]">Test 5</div>
+	</div>
+
+	<script>
+		// Vue.js templates and bindings
+		var app = new Vue({
+			el: '#app',
+			data: {
+			  message: 'Hello Vue!',
+			  someText: 'Testing',
+			  constantText: 'This text will never change',
+			  someLink: '<a href="http://www.google.com">Google</a>',
+			  linkStyles: {
+				backgroundColor: 'blue'
+			  },
+			  linkID: 'link1234',
+			  backgroundStyles: {
+				backgroundColor: 'red'
+			  },
+			  fontStyles: {
+				fontSize: '40px'
+			  },
+			  borderClass: "borders",
+			  sizeClass: "sizes",
+			  marginClass: "margins",
+			  allClasses: [
+				"borders",
+				"sizes",
+				"margins"
+			  ],
+			  shouldAddAccent: true
+			}
+		});
+	</script>
+</body>
+</html>
